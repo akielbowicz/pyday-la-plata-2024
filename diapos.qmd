@@ -1,9 +1,9 @@
 ---
-title: "Un Quarto de DDL, Sambayón y Menta Granizada, please"
+title: "Un Quarto de DDL, Sambayón y Menta Granizada, please."
 author: "Sasha K."
 format: 
     revealjs:
-        theme: solarized
+        theme: solarized 
         logo: imagenes/q4.svg
         footer: "🐍 PyDay La Plata 2024"
 ---
@@ -33,24 +33,30 @@ plt.show()
 
 ---
 
+# Post
 
 ![](./imagenes/q1.svg)
 
 ---
 
+# Paper
 
 ![](./imagenes/q2.svg)
 
 ---
 
+# Manuscript
 
 ![](./imagenes/q3.svg)
 
 ---
 
+# Publicar 
 
 ![](./imagenes/q4.svg)
 
---
+---
 
 [![](imagenes/quarto.png)](https://quarto.org/)
+
+[quarto-live](https://r-wasm.github.io/quarto-live/)
