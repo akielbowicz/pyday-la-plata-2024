@@ -1,12 +1,51 @@
 ---
 title: Manuscrito
 authors:
-  - name: Norah Jones
-    affiliation: The University
+  - name: Sasha
+    affiliation: Gremio Pythonista
     roles: writing
     corresponding: true
 bibliography: references.bib
 ---
 
-## Section
-This is a simple placeholder for the manuscript's main document [@knuth84].
+# Caminatas Aleatorias en $\mathbb{Z}$
+
+```{python}
+import numpy 
+
+pasos = 2*numpy.random.randint(0,2, (100,300)) - 1
+pasos
+```
+
+
+
+```{python}
+import matplotlib.pyplot as plt
+
+caminatas=pasos.cumsum(axis=0)
+plt.plot(caminatas)
+```
+
+
+```{python}
+vuelta_al_origen = numpy.argmax(caminatas == 0, axis=0)
+```
+
+
+```{python}
+plt.hist(vuelta_al_origen,bins=30)
+```
+
+
+```{python}
+t = numpy.arange(100)
+vm = caminatas.mean(axis=1)
+ds = caminatas.var(axis=1)
+
+plt.scatter(t,vm)
+```
+
+```{python}
+plt.scatter(t,ds)
+```
+[@knuth84].
