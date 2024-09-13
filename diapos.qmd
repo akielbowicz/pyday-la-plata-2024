@@ -1,6 +1,6 @@
 ---
 title: "Un `Quarto`  de DDL, Sambayón y Menta Granizada, please."
-subtitle: "[saxa.xyz/quarto](https://saxa.xyz/charla-quarto)"
+subtitle: "[saxa.xyz/charla-quarto](https://saxa.xyz/charla-quarto)"
 author: "Sasha K."
 format: 
     revealjs:

@@ -9,7 +9,9 @@ format:
     comments:
       hypothesis: true
   pdf: default
-  typst: default
+  typst: 
+    columns: 2
+    output-file: caminatas-aleatorias-2c.pdf
 
   # (other formats)
   # pdf: default
