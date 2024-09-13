@@ -112,10 +112,15 @@ caminata = numpy.random.rand(100,1)
 ```
 
 ::: {.callout-note .fragment}
-`Quarto` utiliza `Pandoc` para transformar los documentos 
+`Quarto` utiliza `Pandoc` para transformar los documentos.
+ver lista con los [formatos disponibles](https://quarto.org/docs/output-formats/all-formats.html)
 :::
 
-## 
+## No more $\LaTeX$, por favor.
+
+::: {.fragment}
+Un nuevo lenguage para `typesetting`: [Typst](https://github.com/typst/typst)
+:::
 
 # Un nuevo tipo de documento 
 
@@ -143,7 +148,7 @@ manuscrito:
 ```
 
 ::: {.callout-tip .fragment}
-Hay varios tipos de projectos: website, blog, manuscript, book, confluence
+Hay varios tipos de projectos: website, blog, manuscript, book, confluence, [ver ejemplos](https://quarto.org/docs/gallery/)
 :::
 
 # Publicar nuestros documentos

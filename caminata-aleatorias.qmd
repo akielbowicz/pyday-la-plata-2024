@@ -1,21 +1,14 @@
----
-title: "Caminatas Aleatorias"
-format:
-    pdf:
-        toc: true
-        code-line-numbers: true
----
-
 # Caminatas Aleatorias en $\mathbb{Z}$
 
 ```{python}
 import numpy 
 
-pasos = 2*numpy.random.randint(0,2, (100,300)) - 1
+n_pasos = 100
+n_caminatas = 3 
+
+pasos = 2*numpy.random.randint(0,2, (n_pasos, n_caminatas)) - 1
 pasos
 ```
-
-
 
 <!-- ```{python}
 import matplotlib.pyplot as plt

@@ -1,58 +1,76 @@
 ---
-title: "Caminatas Aleatorias"
+title: "Estudio de caminatas aleatorias en $\\mathbb{Z}$"
 format:
-    typst:
-        toc: true
-        # columns: 2
-    pdf:
-        toc: true
-        code-line-numbers: true
+    pdf: 
+        abstract: 
+            En este trabajo estudiamos distintos comportamientos de caminatas aleatorias unidimensionales en los enteros $\mathbb{Z}$.
+    # typst:
+    #     toc: true
+    #     columns: 2
+    # pdf:
+    #     toc: true
+    #     code-line-numbers: true
 ---
 
-
-# Caminatas Aleatorias en $\mathbb{Z}$
+# Simulación de las caminatas
 
 ```{python}
-import numpy 
+from numpy.random import randint
+from numpy import argmax, arange
+from matplotlib.pyplot import plot, hist, scatter
+```
 
-pasos = 2*numpy.random.randint(0,2, (100,300)) - 1
-pasos
+Si tenemos una variable aleatoria $X \in \{-1,1\}$ con una distribución uniforme. Podemos simularla con:
+
+```{python}
+n_pasos = 100
+n_caminatas = 1 
+
+pasos = 2*randint(0,2, (n_pasos, n_caminatas)) - 1
+```
+
+Una caminata aleatoria de largo $N$ se considera como la trayectoria que realiza una variable aleatoria 
+
+$$
+S = \sum_{i=1}^{N} X_{i}
+$$ {#eq-caminata-aleatoria}
+
+```{python}
+#| fig-cap: Trayectorias que representan caminatas aleatorias
+caminatas = pasos.cumsum(axis=0)
+plot(caminatas)
+```
+
+
+Queremos estudiar cual es la probabilidad $P$ de que un caminante regrese al origen en $n$ pasos.
+
+```{python}
+vuelta_al_origen = argmax(caminatas == 0, axis=0)
 ```
 
 ```{python}
-import matplotlib.pyplot as plt
-
-caminatas=pasos.cumsum(axis=0)
-plt.plot(caminatas)
+h = hist(vuelta_al_origen, bins=30)
 ```
 
-```{python}
-vuelta_al_origen = numpy.argmax(caminatas == 0, axis=0)
-```
+## Estudio del conjunto de caminatas aleatorias
+
+Por la definición de @eq-caminata-aleatoria podemos estudiar la esperanza y la varianza de un conjunto de caminatas
 
 ```{python}
-plt.hist(vuelta_al_origen,bins=30)
-```
-
-
-```{python}
-t = numpy.arange(100)
+#| label: fig-valor-medio
+#| fig-cap: Valor medio o esperanza del conjunto de caminatas aleatorias a tiempo $i$
+t = arange(100)
 vm = caminatas.mean(axis=1)
 ds = caminatas.var(axis=1)
 
-plt.scatter(t,vm)
+scatter(t,vm)
 ```
+
 
 ```{python}
-plt.scatter(t,ds)
+#| label: fig-varianza
+#| fig-cap: Varianza de las caminatas aleatorias
+scatter(t,ds)
 ```
 
-
-$$
-\sum_{i=1}^{N} X_{i} = 100
-$$
-
-
-```{=tex}
-alskdj = 24
-```
+Se puede observar en @fig-valor-medio la mayoria  de las caminatas rondan el origen, y en @fig-varianza como la varianza crece de manera lineal.
