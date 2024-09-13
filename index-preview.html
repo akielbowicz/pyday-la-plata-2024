@@ -244,7 +244,10 @@
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#caminatas-aleatorias-en-mathbbz" id="toc-caminatas-aleatorias-en-mathbbz" class="nav-link active" data-scroll-target="#caminatas-aleatorias-en-mathbbz">Caminatas Aleatorias en <span class="math inline">\(\mathbb{Z}\)</span></a></li>
+  <li><a href="#simulación-de-las-caminatas" id="toc-simulación-de-las-caminatas" class="nav-link active" data-scroll-target="#simulación-de-las-caminatas">Simulación de las caminatas</a>
+  <ul class="collapse">
+  <li><a href="#estudio-del-conjunto-de-caminatas-aleatorias" id="toc-estudio-del-conjunto-de-caminatas-aleatorias" class="nav-link" data-scroll-target="#estudio-del-conjunto-de-caminatas-aleatorias">Estudio del conjunto de caminatas aleatorias</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -252,84 +255,99 @@
 </div>
 <main class="content quarto-banner-title-block" id="quarto-document-content">      
 
-       <section id="caminatas-aleatorias-en-mathbbz" class="level1">
-<h1>Caminatas Aleatorias en <span class="math inline">\(\mathbb{Z}\)</span></h1>
-<div class="cell-container"><div class="cell-decorator"><pre>In [1]:</pre></div><div id="0055e5b0" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>pasos <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>numpy.random.randint(<span class="dv">0</span>,<span class="dv">2</span>, (<span class="dv">100</span>,<span class="dv">300</span>)) <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>pasos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>array([[-1, -1,  1, ...,  1,  1,  1],
-       [-1, -1,  1, ...,  1,  1, -1],
-       [-1,  1, -1, ...,  1, -1,  1],
-       ...,
-       [ 1, -1, -1, ...,  1, -1, -1],
-       [-1,  1, -1, ...,  1, -1, -1],
-       [-1, -1,  1, ..., -1,  1, -1]])</code></pre>
-</div>
+       <section id="simulación-de-las-caminatas" class="level1">
+<h1>Simulación de las caminatas</h1>
+<div class="cell-container"><div class="cell-decorator"><pre>In [1]:</pre></div><div id="84d4f123" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.random <span class="im">import</span> randint</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> argmax, arange</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.pyplot <span class="im">import</span> plot, hist, scatter</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [2]:</pre></div><div id="3efc6de3" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>caminatas<span class="op">=</span>pasos.cumsum(axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>plt.plot(caminatas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b3922081" class="cell markdown">
+<p>Si tenemos una variable aleatoria <span class="math inline">\(X \in \{-1,1\}\)</span> con una distribución uniforme. Podemos simularla con:</p>
+</div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [2]:</pre></div><div id="644a00d4" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>n_pasos <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n_caminatas <span class="op">=</span> <span class="dv">1</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>pasos <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>randint(<span class="dv">0</span>,<span class="dv">2</span>, (n_pasos, n_caminatas)) <span class="op">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<div id="6398a8f1" class="cell markdown">
+<p>Una caminata aleatoria de largo <span class="math inline">\(N\)</span> se considera como la trayectoria que realiza una variable aleatoria</p>
+<p><span id="eq-caminata-aleatoria"><span class="math display">\[
+S = \sum_{i=1}^{N} X_{i}
+\tag{1}\]</span></span></p>
+</div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [3]:</pre></div><div id="b13b543d" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>caminatas <span class="op">=</span> pasos.cumsum(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>plot(caminatas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div class="">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p class=""><a href="index_files/figure-html/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="index_files/figure-html/cell-3-output-1.png" width="577" height="411" class="figure-img"></a></p>
+<p class=""><a href="index_files/figure-html/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Trayectorias que representan caminatas aleatorias"><img src="index_files/figure-html/cell-4-output-1.png" width="569" height="411" alt="Trayectorias que representan caminatas aleatorias" class="figure-img"></a></p>
+<figcaption>Trayectorias que representan caminatas aleatorias</figcaption>
 </figure>
 </div>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [3]:</pre></div><div id="85108e0f" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>vuelta_al_origen <span class="op">=</span> numpy.argmax(caminatas <span class="op">==</span> <span class="dv">0</span>, axis<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [4]:</pre></div><div id="fe6a02cd" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.hist(vuelta_al_origen,bins<span class="op">=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>(array([208.,  21.,  20.,  10.,   9.,   3.,   8.,   2.,   3.,   0.,   1.,
-          3.,   1.,   4.,   0.,   1.,   0.,   1.,   1.,   0.,   0.,   0.,
-          0.,   1.,   1.,   0.,   0.,   0.,   1.,   1.]),
- array([ 0. ,  3.1,  6.2,  9.3, 12.4, 15.5, 18.6, 21.7, 24.8, 27.9, 31. ,
-        34.1, 37.2, 40.3, 43.4, 46.5, 49.6, 52.7, 55.8, 58.9, 62. , 65.1,
-        68.2, 71.3, 74.4, 77.5, 80.6, 83.7, 86.8, 89.9, 93. ]),
- &lt;BarContainer object of 30 artists&gt;)</code></pre>
+<div id="449d8087" class="cell markdown">
+<p>Queremos estudiar cual es la probabilidad <span class="math inline">\(P\)</span> de que un caminante regrese al origen en <span class="math inline">\(n\)</span> pasos.</p>
 </div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [4]:</pre></div><div id="68d65e9b" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>vuelta_al_origen <span class="op">=</span> argmax(caminatas <span class="op">==</span> <span class="dv">0</span>, axis<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [5]:</pre></div><div id="d8003f84" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> hist(vuelta_al_origen, bins<span class="op">=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
-<p class=""><a href="index_files/figure-html/cell-5-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="index_files/figure-html/cell-5-output-2.png" width="575" height="411" class="figure-img"></a></p>
+<p class=""><a href="index_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="index_files/figure-html/cell-6-output-1.png" width="571" height="411" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [5]:</pre></div><div id="6f4d2136" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> numpy.arange(<span class="dv">100</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>vm <span class="op">=</span> caminatas.mean(axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> caminatas.var(axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.scatter(t,vm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b096f34b" class="cell markdown">
+<section id="estudio-del-conjunto-de-caminatas-aleatorias" class="level2">
+<h2 class="anchored" data-anchor-id="estudio-del-conjunto-de-caminatas-aleatorias">Estudio del conjunto de caminatas aleatorias</h2>
+<p>Por la definición de <a href="#eq-caminata-aleatoria" class="quarto-xref">Equation&nbsp;1</a> podemos estudiar la esperanza y la varianza de un conjunto de caminatas</p>
+</section>
+</div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [6]:</pre></div><div id="cell-fig-valor-medio" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> arange(<span class="dv">100</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>vm <span class="op">=</span> caminatas.mean(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> caminatas.var(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>scatter(t,vm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div class="">
-<figure class="figure">
-<p class=""><a href="index_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="index_files/figure-html/cell-6-output-1.png" width="582" height="411" class="figure-img"></a></p>
+<div id="fig-valor-medio" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-valor-medio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="index_files/figure-html/fig-valor-medio-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;1: Valor medio o esperanza del conjunto de caminatas aleatorias a tiempo i"><img src="index_files/figure-html/fig-valor-medio-output-1.png" width="569" height="411" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-valor-medio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Valor medio o esperanza del conjunto de caminatas aleatorias a tiempo <span class="math inline">\(i\)</span>
+</figcaption>
 </figure>
 </div>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [6]:</pre></div><div id="125c3fc4" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.scatter(t,ds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [7]:</pre></div><div id="cell-fig-varianza" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>scatter(t,ds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div class="">
-<figure class="figure">
-<p class=""><a href="index_files/figure-html/cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="index_files/figure-html/cell-7-output-1.png" width="575" height="416" class="figure-img"></a></p>
+<div id="fig-varianza" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-varianza-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="index_files/figure-html/fig-varianza-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;2: Varianza de las caminatas aleatorias"><img src="index_files/figure-html/fig-varianza-output-1.png" width="590" height="411" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-varianza-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Varianza de las caminatas aleatorias
+</figcaption>
 </figure>
 </div>
 </div>
 </div></div>
-<div id="9fb25188" class="cell markdown">
-<p><span class="citation" data-cites="knuth84">(<a href="#ref-knuth84" role="doc-biblioref">Knuth 1984</a>)</span>.</p>
+<div id="bee9e6d4" class="cell markdown">
+<p>Se puede observar en <a href="#fig-valor-medio" class="quarto-xref">Figure&nbsp;1</a> la mayoria de las caminatas rondan el origen, y en <a href="#fig-varianza" class="quarto-xref">Figure&nbsp;2</a> como la varianza crece de manera lineal.</p>
+<p>Cualquer duda consultar <span class="citation" data-cites="knuth84">(<a href="#ref-knuth84" role="doc-biblioref">Knuth 1984</a>)</span>.</p>
 </div>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-knuth84" class="csl-entry" role="listitem">
@@ -757,7 +775,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>  </div> <!-- /content -->  <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom","openEffect":"zoom"});
+</script>  </div> <!-- /content -->  <script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

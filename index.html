@@ -145,7 +145,10 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#caminatas-aleatorias-en-mathbbz" id="toc-caminatas-aleatorias-en-mathbbz" class="nav-link active" data-scroll-target="#caminatas-aleatorias-en-mathbbz">Caminatas Aleatorias en <span class="math inline">\(\mathbb{Z}\)</span></a></li>
+  <li><a href="#simulación-de-las-caminatas" id="toc-simulación-de-las-caminatas" class="nav-link active" data-scroll-target="#simulación-de-las-caminatas">Simulación de las caminatas</a>
+  <ul class="collapse">
+  <li><a href="#estudio-del-conjunto-de-caminatas-aleatorias" id="toc-estudio-del-conjunto-de-caminatas-aleatorias" class="nav-link" data-scroll-target="#estudio-del-conjunto-de-caminatas-aleatorias">Estudio del conjunto de caminatas aleatorias</a></li>
+  </ul></li>
   </ul>
 <div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="index-preview.html"><i class="bi bi-journal-code"></i>Article Notebook</a></li></ul></div></nav>
 </div>
@@ -158,66 +161,68 @@ window.Quarto = {
   
 
 
-<section id="caminatas-aleatorias-en-mathbbz" class="level1">
-<h1>Caminatas Aleatorias en <span class="math inline">\(\mathbb{Z}\)</span></h1>
-<div id="0055e5b0" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>array([[-1, -1,  1, ...,  1,  1,  1],
-       [-1, -1,  1, ...,  1,  1, -1],
-       [-1,  1, -1, ...,  1, -1,  1],
-       ...,
-       [ 1, -1, -1, ...,  1, -1, -1],
-       [-1,  1, -1, ...,  1, -1, -1],
-       [-1, -1,  1, ..., -1,  1, -1]])</code></pre>
+<section id="simulación-de-las-caminatas" class="level1">
+<h1>Simulación de las caminatas</h1>
+<p>Si tenemos una variable aleatoria <span class="math inline">\(X \in \{-1,1\}\)</span> con una distribución uniforme. Podemos simularla con:</p>
+<p>Una caminata aleatoria de largo <span class="math inline">\(N\)</span> se considera como la trayectoria que realiza una variable aleatoria</p>
+<p><span id="eq-caminata-aleatoria"><span class="math display">\[
+S = \sum_{i=1}^{N} X_{i}
+\tag{1}\]</span></span></p>
+<div id="b13b543d" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="index_files/figure-html/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Trayectorias que representan caminatas aleatorias"><img src="index_files/figure-html/cell-4-output-1.png" width="569" height="411" alt="Trayectorias que representan caminatas aleatorias" class="figure-img"></a></p>
+<figcaption>Trayectorias que representan caminatas aleatorias</figcaption>
+</figure>
 </div>
-<a class="quarto-notebook-link" id="nblink-1" href="index-preview.html#0055e5b0">Source: Article Notebook</a></div>
-<div id="3efc6de3" class="cell" data-execution_count="2">
+</div>
+<a class="quarto-notebook-link" id="nblink-1" href="index-preview.html#b13b543d">Source: Article Notebook</a></div>
+<p>Queremos estudiar cual es la probabilidad <span class="math inline">\(P\)</span> de que un caminante regrese al origen en <span class="math inline">\(n\)</span> pasos.</p>
+<div id="d8003f84" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="index_files/figure-html/cell-3-output-1.png" width="577" height="411" class="figure-img"></a></p>
+<p><a href="index_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="index_files/figure-html/cell-6-output-1.png" width="571" height="411" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="fe6a02cd" class="cell" data-execution_count="4">
-<div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>(array([208.,  21.,  20.,  10.,   9.,   3.,   8.,   2.,   3.,   0.,   1.,
-          3.,   1.,   4.,   0.,   1.,   0.,   1.,   1.,   0.,   0.,   0.,
-          0.,   1.,   1.,   0.,   0.,   0.,   1.,   1.]),
- array([ 0. ,  3.1,  6.2,  9.3, 12.4, 15.5, 18.6, 21.7, 24.8, 27.9, 31. ,
-        34.1, 37.2, 40.3, 43.4, 46.5, 49.6, 52.7, 55.8, 58.9, 62. , 65.1,
-        68.2, 71.3, 74.4, 77.5, 80.6, 83.7, 86.8, 89.9, 93. ]),
- &lt;BarContainer object of 30 artists&gt;)</code></pre>
-</div>
+<section id="estudio-del-conjunto-de-caminatas-aleatorias" class="level2">
+<h2 class="anchored" data-anchor-id="estudio-del-conjunto-de-caminatas-aleatorias">Estudio del conjunto de caminatas aleatorias</h2>
+<p>Por la definición de <a href="#eq-caminata-aleatoria" class="quarto-xref">Equation&nbsp;1</a> podemos estudiar la esperanza y la varianza de un conjunto de caminatas</p>
+<div id="cell-fig-valor-medio" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="index_files/figure-html/cell-5-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="index_files/figure-html/cell-5-output-2.png" width="575" height="411" class="figure-img"></a></p>
+<div id="fig-valor-medio" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-valor-medio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-valor-medio-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;1: Valor medio o esperanza del conjunto de caminatas aleatorias a tiempo i"><img src="index_files/figure-html/fig-valor-medio-output-1.png" width="569" height="411" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-valor-medio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Valor medio o esperanza del conjunto de caminatas aleatorias a tiempo <span class="math inline">\(i\)</span>
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div id="6f4d2136" class="cell" data-execution_count="5">
+<div id="cell-fig-varianza" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="index_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="index_files/figure-html/cell-6-output-1.png" width="582" height="411" class="figure-img"></a></p>
+<div id="fig-varianza" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-varianza-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-varianza-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;2: Varianza de las caminatas aleatorias"><img src="index_files/figure-html/fig-varianza-output-1.png" width="590" height="411" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-varianza-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Varianza de las caminatas aleatorias
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div id="125c3fc4" class="cell" data-execution_count="6">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="index_files/figure-html/cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="index_files/figure-html/cell-7-output-1.png" width="575" height="416" class="figure-img"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<p><span class="citation" data-cites="knuth84">(<a href="#ref-knuth84" role="doc-biblioref">Knuth 1984</a>)</span>.</p>
+<p>Se puede observar en <a href="#fig-valor-medio" class="quarto-xref">Figure&nbsp;1</a> la mayoria de las caminatas rondan el origen, y en <a href="#fig-varianza" class="quarto-xref">Figure&nbsp;2</a> como la varianza crece de manera lineal.</p>
+<p>Cualquer duda consultar <span class="citation" data-cites="knuth84">(<a href="#ref-knuth84" role="doc-biblioref">Knuth 1984</a>)</span>.</p>
 
+</section>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
@@ -647,7 +652,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","selector":".lightbox","loop":false,"closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

@@ -193,24 +193,15 @@
 \maketitle
 
 
-\section{\texorpdfstring{Caminatas Aleatorias en
-\(\mathbb{Z}\)}{Caminatas Aleatorias en \textbackslash mathbb\{Z\}}}\label{caminatas-aleatorias-en-mathbbz}
-
-\begin{verbatim}
-array([[ 1, -1, -1, ...,  1, -1, -1],
-       [-1,  1, -1, ..., -1, -1,  1],
-       [-1,  1, -1, ..., -1, -1,  1],
-       ...,
-       [ 1,  1, -1, ..., -1,  1,  1],
-       [-1, -1, -1, ..., -1,  1, -1],
-       [-1,  1,  1, ..., -1,  1,  1]])
-\end{verbatim}
+\section{Simulación de las
+caminatas}\label{simulaciuxf3n-de-las-caminatas}
 
 \textsubscript{Source:
 \href{https://akielbowicz.github.io/pyday-la-plata-2024/index.qmd.html}{Article
 Notebook}}
 
-\includegraphics{index_files/figure-pdf/cell-3-output-1.pdf}
+Si tenemos una variable aleatoria \(X \in \{-1,1\}\) con una
+distribución uniforme. Podemos simularla con:
 
 \textsubscript{Source:
 \href{https://akielbowicz.github.io/pyday-la-plata-2024/index.qmd.html}{Article
@@ -220,17 +211,37 @@ Notebook}}
 \href{https://akielbowicz.github.io/pyday-la-plata-2024/index.qmd.html}{Article
 Notebook}}
 
-\begin{verbatim}
-(array([205.,  13.,  21.,   9.,   3.,   6.,   7.,   0.,   5.,   0.,   3.,
-          5.,   0.,   3.,   3.,   1.,   4.,   3.,   1.,   1.,   1.,   2.,
-          1.,   1.,   0.,   0.,   0.,   1.,   0.,   1.]),
- array([ 0. ,  3.3,  6.6,  9.9, 13.2, 16.5, 19.8, 23.1, 26.4, 29.7, 33. ,
-        36.3, 39.6, 42.9, 46.2, 49.5, 52.8, 56.1, 59.4, 62.7, 66. , 69.3,
-        72.6, 75.9, 79.2, 82.5, 85.8, 89.1, 92.4, 95.7, 99. ]),
- <BarContainer object of 30 artists>)
-\end{verbatim}
+Una caminata aleatoria de largo \(N\) se considera como la trayectoria
+que realiza una variable aleatoria
 
-\includegraphics{index_files/figure-pdf/cell-5-output-2.pdf}
+\begin{equation}\phantomsection\label{eq-caminata-aleatoria}{
+S = \sum_{i=1}^{N} X_{i}
+}\end{equation}
+
+\textsubscript{Source:
+\href{https://akielbowicz.github.io/pyday-la-plata-2024/index.qmd.html}{Article
+Notebook}}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{index_files/figure-pdf/cell-4-output-1.pdf}
+
+}
+
+\caption{Trayectorias que representan caminatas aleatorias}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://akielbowicz.github.io/pyday-la-plata-2024/index.qmd.html}{Article
+Notebook}}
+
+Queremos estudiar cual es la probabilidad \(P\) de que un caminante
+regrese al origen en \(n\) pasos.
+
+\textsubscript{Source:
+\href{https://akielbowicz.github.io/pyday-la-plata-2024/index.qmd.html}{Article
+Notebook}}
 
 \textsubscript{Source:
 \href{https://akielbowicz.github.io/pyday-la-plata-2024/index.qmd.html}{Article
@@ -242,13 +253,54 @@ Notebook}}
 \href{https://akielbowicz.github.io/pyday-la-plata-2024/index.qmd.html}{Article
 Notebook}}
 
-\includegraphics{index_files/figure-pdf/cell-7-output-1.pdf}
+\subsection{Estudio del conjunto de caminatas
+aleatorias}\label{estudio-del-conjunto-de-caminatas-aleatorias}
+
+Por la definición de Equation~\ref{eq-caminata-aleatoria} podemos
+estudiar la esperanza y la varianza de un conjunto de caminatas
 
 \textsubscript{Source:
 \href{https://akielbowicz.github.io/pyday-la-plata-2024/index.qmd.html}{Article
 Notebook}}
 
-(Knuth 1984).
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{index_files/figure-pdf/fig-valor-medio-output-1.pdf}
+
+}
+
+\caption{\label{fig-valor-medio}Valor medio o esperanza del conjunto de
+caminatas aleatorias a tiempo \(i\)}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://akielbowicz.github.io/pyday-la-plata-2024/index.qmd.html}{Article
+Notebook}}
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{index_files/figure-pdf/fig-varianza-output-1.pdf}
+
+}
+
+\caption{\label{fig-varianza}Varianza de las caminatas aleatorias}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://akielbowicz.github.io/pyday-la-plata-2024/index.qmd.html}{Article
+Notebook}}
+
+Se puede observar en Figure~\ref{fig-valor-medio} la mayoria de las
+caminatas rondan el origen, y en Figure~\ref{fig-varianza} como la
+varianza crece de manera lineal.
+
+Cualquer duda consultar (Knuth 1984).
 
 \textsubscript{Source:
 \href{https://akielbowicz.github.io/pyday-la-plata-2024/index.qmd.html}{Article
