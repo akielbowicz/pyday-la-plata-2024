@@ -1,0 +1,24 @@
+project:
+  type: manuscript
+
+manuscript:
+  article: index.qmd
+
+format:
+  html:
+    comments:
+      hypothesis: true
+  pdf: 
+    output-file: caminatas-aleatorias.pdf
+  typst: 
+    columns: 2
+    output-file: caminatas-aleatorias-2c.pdf
+
+  # (other formats)
+  # pdf: default
+
+execute:
+  freeze: true
+
+
+

@@ -1,0 +1,41 @@
+# Caminatas Aleatorias en $\mathbb{Z}$
+
+```{python}
+import numpy 
+
+n_pasos = 100
+n_caminatas = 3 
+
+pasos = 2*numpy.random.randint(0,2, (n_pasos, n_caminatas)) - 1
+pasos
+```
+
+<!-- ```{python}
+import matplotlib.pyplot as plt
+
+caminatas=pasos.cumsum(axis=0)
+plt.plot(caminatas)
+``` -->
+
+
+<!-- ```{python}
+vuelta_al_origen = numpy.argmax(caminatas == 0, axis=0)
+``` -->
+
+<!-- 
+```{python}
+plt.hist(vuelta_al_origen,bins=30)
+``` -->
+
+
+<!-- ```{python}
+t = numpy.arange(100)
+vm = caminatas.mean(axis=1)
+ds = caminatas.var(axis=1)
+
+plt.scatter(t,vm)
+``` -->
+
+<!-- ```{python}
+plt.scatter(t,ds)
+``` -->

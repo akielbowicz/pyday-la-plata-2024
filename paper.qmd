@@ -1,0 +1,81 @@
+---
+title: "Estudio de caminatas aleatorias en $\\mathbb{Z}$"
+authors: 
+    - name: Sasha K
+      affiliation: United Pythonistas
+format:
+    typst: 
+        abstract: 
+            En este trabajo estudiamos distintos comportamientos de caminatas aleatorias unidimensionales en los enteros $\mathbb{Z}$.
+    # typst:
+        toc: true
+        columns: 2
+        fig-width: 1
+    # pdf:
+    #     toc: true
+    #     code-line-numbers: true
+echo: false
+---
+
+# Simulación de las caminatas
+
+```{python}
+from numpy.random import randint
+from numpy import argmax, arange
+from matplotlib.pyplot import plot, hist, scatter
+```
+
+Si tenemos una variable aleatoria $X \in \{-1,1\}$ con una distribución uniforme. Podemos simularla con:
+
+```{python}
+n_pasos = 100
+n_caminatas = 1 
+
+pasos = 2*randint(0,2, (n_pasos, n_caminatas)) - 1
+```
+
+Una caminata aleatoria de largo $N$ se considera como la trayectoria que realiza una variable aleatoria 
+
+$$
+S = \sum_{i=1}^{N} X_{i}
+$$ {#eq-caminata-aleatoria}
+
+```{python}
+#| fig-cap: Trayectorias que representan caminatas aleatorias
+caminatas = pasos.cumsum(axis=0)
+plot(caminatas)
+```
+
+
+Queremos estudiar cual es la probabilidad $P$ de que un caminante regrese al origen en $n$ pasos.
+
+```{python}
+vuelta_al_origen = argmax(caminatas == 0, axis=0)
+```
+
+```{python}
+h = hist(vuelta_al_origen, bins=30)
+```
+
+## Estudio del conjunto de caminatas aleatorias
+
+Por la definición de @eq-caminata-aleatoria podemos estudiar la esperanza y la varianza de un conjunto de caminatas
+
+```{python}
+#| label: fig-valor-medio
+#| fig-cap: Valor medio o esperanza del conjunto de caminatas aleatorias a tiempo $i$
+t = arange(100)
+vm = caminatas.mean(axis=1)
+ds = caminatas.var(axis=1)
+
+scatter(t,vm)
+```
+
+
+```{python}
+#| label: fig-varianza
+#| fig-cap: Varianza de las caminatas aleatorias
+scatter(t,ds)
+```
+
+Se puede observar en @fig-valor-medio la mayoria  de las caminatas rondan el origen, y en @fig-varianza como la varianza crece de manera lineal.
