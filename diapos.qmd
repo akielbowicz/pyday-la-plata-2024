@@ -1,62 +1,122 @@
 ---
-title: "Un Quarto de DDL, Sambayón y Menta Granizada, please."
+title: "Un `Quarto`  de DDL, Sambayón y Menta Granizada, please."
+subtitle: "[saxa.xyz/quarto](https://saxa.xyz/quarto)"
 author: "Sasha K."
 format: 
     revealjs:
         theme: solarized 
         logo: imagenes/q4.svg
         footer: "🐍 PyDay La Plata 2024"
+        chalkboard: true
+        output-file: slides
 ---
 
-![](./imagenes/q0.svg)
+
+# Un problema
+
+![](./imagenes/q0.svg){fig-align="left"}
 
 ---
 
-```{.shell}
-quarto help
-```
-
----
-
-```{.python code-line-numbers="|6|9"}
-import numpy as np
+```{python}
+#| echo: true
+#| output-location: slide
+#| fig-cap: 
+#|   Trayectorias de tres caminantes en busca de sus helados
+#| code-line-numbers: "6|7"
+from numpy.random import randint
 import matplotlib.pyplot as plt
 
-r = np.arange(0, 2, 0.01)
-theta = 2 * np.pi * r
-fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
-ax.plot(theta, r)
-ax.set_rticks([0.5, 1, 1.5, 2])
-ax.grid(True)
-plt.show()
+n_pasos = 100
+n_caminatas = 3
+pasos = 2*randint(0,2, (n_pasos, n_caminatas)) - 1
+caminatas = pasos.cumsum(axis=0)
+plt.plot(caminatas)
 ```
 
+# Intro
+
+![](./imagenes/q1.svg){fig-align="center"}
+
+## Setup de Quarto y VSCode
+
+```{.shell code-line-numbers="false"}
+> quarto help
+```
+::: {.fragment}
+```{.shell code-line-numbers="false"}
+> vscodium --install-extension quarto.quarto
+```
+:::
+
+## Front Matter
+
+```{.yaml code-line-numbers="false"}
 ---
-
-# Post
-
-![](./imagenes/q1.svg)
-
+title: "Caminatas Aleatorias"
+format: default
 ---
+```
 
-# Paper
+# Renderizar un documento
 
-![](./imagenes/q2.svg)
+![](./imagenes/q2.svg){fig-align="center"}
 
----
+## Tenemos distintos tipos de documentos de salida
 
-# Manuscript
+```{.shell code-line-numbers="false"}
+> quarto render documento.qmd --to pdf
+```
 
-![](./imagenes/q3.svg)
+::: {.callout-note .fragment}
+`Quarto` utiliza `Pandoc` para transformar los documentos 
+:::
 
----
+# Un nuevo tipo de documento 
+
+:::{.fragment}
+El Manuscrito (*Manuscript*)
+:::
+
+![](./imagenes/q3.svg){fig-align="center"}
+
+
+## Creamos un nuevo proyecto
+
+```{.shell code-line-numbers="false"}
+> quarto create project manuscript
+```
+```{.shell .fragment code-line-numbers="false"}
+ ? Directory » manuscrito
+Creating project at 
+manuscrito:
+  - Created _quarto.yml
+  - Created .gitignore
+  - Created index.qmd
+  - Created references.bib
+```
 
 # Publicar 
 
-![](./imagenes/q4.svg)
+![](./imagenes/q4.svg){fig-align="right"}
 
----
+# Gracias! 🍧
 
 [![](imagenes/quarto.png)](https://quarto.org/)
 
+## Un par de toppings
+
+[formatos de revistas para publicar](https://quarto.org/docs/extensions/listing-journals.html)
+
 [quarto-live](https://r-wasm.github.io/quarto-live/)
+
+### Materiales de esta charla
+
+[akielbowicz/pyday-la-plata-2024](https://github.com/akielbowicz/pyday-la-plata-2024)
+
+### Materiales en YT <i class="fa fa-youtube-play"></i>
+
+[Videos del canal de *Posit*](https://www.youtube.com/playlist?list=PL9HYL-VRX0oQI8fVioFxMTBrViFnRX_Df)
+
+[Charlas y videos de Mine Çetinkaya-Rundel](https://www.youtube.com/results?search_query=quarto+mine+rundel)
+
