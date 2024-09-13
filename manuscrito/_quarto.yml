@@ -8,7 +8,8 @@ format:
   html:
     comments:
       hypothesis: true
-  pdf: default
+  pdf: 
+    output-file: caminatas-aleatorias.pdf
   typst: 
     columns: 2
     output-file: caminatas-aleatorias-2c.pdf
