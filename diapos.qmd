@@ -1,6 +1,6 @@
 ---
 title: "Un `Quarto`  de DDL, Sambayón y Menta Granizada, please."
-subtitle: "[saxa.xyz/quarto](https://saxa.xyz/quarto)"
+subtitle: "[saxa.xyz/quarto](https://saxa.xyz/charla-quarto)"
 author: "Sasha K."
 format: 
     revealjs:
@@ -21,6 +21,7 @@ format:
 ```{python}
 #| echo: true
 #| output-location: slide
+#| fig-align: left
 #| fig-cap: 
 #|   Trayectorias de tres caminantes en busca de sus helados
 #| code-line-numbers: "6|7"
@@ -43,13 +44,45 @@ plt.plot(caminatas)
 ```{.shell code-line-numbers="false"}
 > quarto help
 ```
+
 ::: {.fragment}
+Instalamos la extensión de Quarto para VSCode
+
 ```{.shell code-line-numbers="false"}
 > vscodium --install-extension quarto.quarto
 ```
 :::
 
-## Front Matter
+::: {.fragment}
+Configuramos el ambiente virtual de python[^requirements], es necesario instalar `jupyter`
+
+```{.shell code-line-numbers="false"}
+> python -m venv .venv 
+> .\.venv\Scripts\Activate.ps1 
+> python -m pip install jupyter matplotlib numpy 
+> vscodium . 
+```
+:::
+
+[^requirements]: Lo preferible es tener un `requirements.txt`
+
+## El notebook de Quarto 
+
+:::{.fragment}
+Los archivos tienen extensión `.qmd`
+
+```{markdown}
+# Un documento
+
+Que es un `markdown` con esteroides 
+
+$E=mc^{2}$
+```
+:::
+
+:::{.fragment}
+
+El **Front Matter** contiene la metadata del documento
 
 ```{.yaml code-line-numbers="false"}
 ---
@@ -57,6 +90,16 @@ title: "Caminatas Aleatorias"
 format: default
 ---
 ```
+:::
+
+## Celdas ejecutables
+
+```` markdown
+```python
+#| code-line-numbers="false"
+caminata = numpy.random.rand(100,1)
+```
+````
 
 # Renderizar un documento
 
@@ -72,6 +115,8 @@ format: default
 `Quarto` utiliza `Pandoc` para transformar los documentos 
 :::
 
+## 
+
 # Un nuevo tipo de documento 
 
 :::{.fragment}
@@ -80,7 +125,6 @@ El Manuscrito (*Manuscript*)
 
 ![](./imagenes/q3.svg){fig-align="center"}
 
-
 ## Creamos un nuevo proyecto
 
 ```{.shell code-line-numbers="false"}
@@ -88,6 +132,8 @@ El Manuscrito (*Manuscript*)
 ```
 ```{.shell .fragment code-line-numbers="false"}
  ? Directory » manuscrito
+``` 
+```{.shell .fragment code-line-numbers="false"}
 Creating project at 
 manuscrito:
   - Created _quarto.yml
@@ -96,9 +142,23 @@ manuscrito:
   - Created references.bib
 ```
 
-# Publicar 
+::: {.callout-tip .fragment}
+Hay varios tipos de projectos: website, blog, manuscript, book, confluence
+:::
+
+# Publicar nuestros documentos
 
 ![](./imagenes/q4.svg){fig-align="right"}
+
+## Publicar a GitHub Pages
+
+```{.shell code-line-numbers="false"}
+> quarto publish gh-pages
+```
+
+::: {.fragment}
+Manuscrito [*saxa.xyz/man-quarto*](https://ak.saxa.xyz/pyday-la-plata-2024/)
+:::
 
 # Gracias! 🍧
 

@@ -5,6 +5,10 @@ Material de la charla "Un Quarto de DDL, Sambayón y Menta Granizada, please" de
 ![cono](./imagenes/q4.svg)
 
 
+[Diapositivas online](https://slides.saxa.xyz/slides/pyday_la_plata_2024/slides.html)
+
+[Manuscrito](https://ak.saxa.xyz/pyday-la-plata-2024/)
+
 ---
 
 
