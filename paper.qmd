@@ -1,15 +1,20 @@
 ---
 title: "Estudio de caminatas aleatorias en $\\mathbb{Z}$"
+authors: 
+    - name: Sasha K
+      affiliation: United Pythonistas
 format:
-    pdf: 
+    typst: 
         abstract: 
             En este trabajo estudiamos distintos comportamientos de caminatas aleatorias unidimensionales en los enteros $\mathbb{Z}$.
     # typst:
-    #     toc: true
-    #     columns: 2
+        toc: true
+        columns: 2
+        fig-width: 1
     # pdf:
     #     toc: true
     #     code-line-numbers: true
+echo: false
 ---
 
 # Simulación de las caminatas
